@@ -1,0 +1,18 @@
+parser grammar SpaceGameParser;
+options { tokenVocab= SpaceGameLexer; }
+
+config: (rule NEWLINE)* EOF;
+
+rule: orders
+| creates
+| preceedes
+| includes
+;
+
+orders: ID ORDERS ID ID (',' ID)* ;
+
+creates: ID CREATES ID (',' ID)*;
+
+preceedes: ID PRECEEDES ID;
+
+includes: ID INCLUDES ID (',' ID)*;

@@ -1,0 +1,9 @@
+Player creates Ship, GuidedMissle
+Game creates Meteor, BlackHole
+Player orders Ship Move, Turn, Shoot
+Player orders GuidedMissle Move, Turn, Explode
+Move includes CheckCollision, BurnFuel
+BurnFuel preceedes Move
+Move preceedes CheckCollision
+Shoot includes SpendAmmo
+SpendAmmo preceedes Shoot
