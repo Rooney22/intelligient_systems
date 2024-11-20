@@ -1,4 +1,5 @@
-from ..AbstractClasses.State import State
+from lab3.AbstractClasses.State import State
+
 
 class LiftState(State):
 

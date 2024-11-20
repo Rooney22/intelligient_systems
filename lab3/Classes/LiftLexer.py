@@ -100,7 +100,6 @@ class LiftLexer(Lexer):
         self.env_state = list(filter(lambda pas: not(pas[0] == lift_state[0] and ((pas[1] - pas[0] > 0) == direction)), self.env_state))
         return lift_state, 'OF'
 
-
     def __check_go(self, lift_state, state_name):
         lift_dict = {
                 'E': self.__find_nearest_out,
