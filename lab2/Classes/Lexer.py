@@ -21,6 +21,7 @@ class Lexer:
         raw_symbols = cleaned_text.split()
         for symbol in raw_symbols:
             self.symbols.append(self.__preprocess_symbol(symbol))
+        self.symbols.append('-|')
         self.current_symbol = self.symbols.popleft()
 
     def error(self, state_num, next_state):
@@ -28,7 +29,7 @@ class Lexer:
             True: self.__check_error_state,
             False: self.__check_no_error_state
         }
-        return error_dict[state_num in error_dict](state_num, next_state)
+        return error_dict[state_num in self.error_list](state_num, next_state)
 
     def accept(self):
         self.current_symbol = self.symbols.popleft()
@@ -39,9 +40,9 @@ class Lexer:
     @staticmethod
     def __preprocess_symbol(symbol):
         patterns = {
-            'number': r'-?\d+',
-            'boolean': r'(True|False)',
-            'type': r'^(int|boolean)',
+            'число': r'-?\d+',
+            'булеан': r'(True|False)',
+            'тип': r'^(int|boolean)',
             'return': r'return',
             'def': r'def',
             'id': r'[a-zA-Z]+',

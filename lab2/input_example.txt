@@ -1,6 +1,6 @@
 def hello ( hello_arg ) {
-    return hello_arg;
+    return hello_arg
 } ;
-int a = a;
-int b = b;
-a + b;
+int a = a ;
+int b = b ;
+a + b

@@ -11,4 +11,8 @@ if __name__ == "__main__":
         lexer.get_symbols(file.read())
     state = start_state
     while(True):
-        state = state.next()
+        try:
+            state = state.next()
+        except IndexError as ie:
+            if lexer.current_symbol == '-|':
+                print('Выражение принадлежит языку')

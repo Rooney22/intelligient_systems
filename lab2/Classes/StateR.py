@@ -10,4 +10,4 @@ class StateR(State):
 
     def next(self):
         next_state = self.lexer.error(self.state_num, self.next_state)
-        return stack.pop()
+        return self.lexer.get_next_state(stack.pop())

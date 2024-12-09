@@ -9,5 +9,4 @@ class StateNormal(State):
 
     def next(self):
         next_state = self.lexer.error(self.state_num, self.next_state)
-        self.lexer.accept()
         return self.lexer.get_next_state(next_state)
