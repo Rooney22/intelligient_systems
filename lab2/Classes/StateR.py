@@ -10,4 +10,7 @@ class StateR(State):
 
     def next(self):
         next_state = self.lexer.error(self.state_num, self.next_state)
-        return self.lexer.get_next_state(stack.pop())
+        try:
+            return self.lexer.get_next_state(stack.pop())
+        except IndexError:
+            raise ValueError('Стек пустой')

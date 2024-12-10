@@ -37,6 +37,13 @@ class Lexer:
     def get_next_state(self, next_state):
         return self.state_dict[next_state]
 
+    def check_end(self):
+        check_dict = {
+            False: 'Выражение не принадлежит языку',
+            True: 'Выражение принадлежит языку'
+        }
+        return check_dict[self.current_symbol == '-|']
+
     @staticmethod
     def __preprocess_symbol(symbol):
         patterns = {
@@ -58,7 +65,6 @@ class Lexer:
             True: next_state,
             False: state_num[:-1] + str(int(state_num[-1]) + 1)
         }
-        print(self.current_symbol, self.symbols_dict[state_num])
         return check_dict[self.current_symbol in self.symbols_dict[state_num]]
 
     def __check_error_state(self, state_num, next_state):
