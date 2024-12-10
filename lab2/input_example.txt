@@ -3,4 +3,5 @@ def hello ( hello_arg ) {
 } ;
 int a = a ;
 int b = b ;
-a + b
+boolean c = True ;
+a + b > 0 == c
