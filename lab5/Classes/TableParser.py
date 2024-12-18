@@ -15,15 +15,14 @@ class TableParser:
         for index, row in table.iterrows():
             state = str(row['state'])
             state_dict[state] = dict()
+            check_dict = {
+                'r': self.__add_r_action,
+                's': self.__add_s_action,
+                'a': self.__add_acc_action
+            }
             for column in table.columns[1:]:
-                if row[column] is np.nan:
-                    continue
-                if row[column][0] == 'r':
-                    state_dict[state][column] = ActionR(row[column][1:])
-                elif row[column][0] == 's':
-                    state_dict[state][column] = ActionS(row[column][1:])
-                elif row[column] == 'acc':
-                    state_dict[state][column] = ActionAcc('0')
+                if row[column] is not np.nan:
+                    check_dict.get(row[column][0])(state_dict, state, column, row[column][1:])
         self.lexer.initiate_states(state_dict)
 
     def parse_info_table(self, table_path):
@@ -32,3 +31,19 @@ class TableParser:
         for index, row in table.iterrows():
             info_dict[str(row['rule'])] = [row['n'], row['return']]
         self.lexer.initiate_info(info_dict, set(table['return']))
+    
+    @staticmethod
+    def __add_r_action(state_dict, state, column, number):
+        state_dict[state][column] = ActionR(number)
+    
+    @staticmethod
+    def __add_s_action(state_dict, state, column, number):
+        state_dict[state][column] = ActionS(number)
+        
+    @staticmethod    
+    def __add_acc_action(state_dict, state, column, number):
+        state_dict[state][column] = ActionAcc('0')
+    
+    @staticmethod
+    def __none_action(state_dict, state, column, number):
+        pass

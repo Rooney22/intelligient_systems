@@ -35,7 +35,6 @@ class Lexer:
         self.current_symbol = symbol
 
     def action_s(self):
-        #if self.current_symbol not in self.non_terminal_symbols:
         self.current_symbol = self.symbols.popleft()
 
     def get_next_state(self, state_name):

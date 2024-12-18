@@ -2,6 +2,7 @@ from lab5.Classes.Lexer import Lexer
 from lab5.Classes.TableParser import TableParser
 from lab5.Classes.StateLR import StateLR
 
+
 def check_file(file_path, output_path):
     with open(file_path, 'r') as file:
         lexer.get_symbols(file.read())
@@ -16,8 +17,6 @@ def check_file(file_path, output_path):
     except Exception as e:
         with open(output_path, 'w') as file:
             file.write('Wrong sentence')
-
-
 
 
 if __name__ == "__main__":
