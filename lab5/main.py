@@ -3,10 +3,6 @@ from lab5.Classes.TableParser import TableParser
 from lab5.Classes.StateLR import StateLR
 
 
-def get_error():
-    return "Выражение не принадлежит языку"
-
-
 if __name__ == "__main__":
     table_path = 'my_LL.xlsx'
     lexer = Lexer()
@@ -16,5 +12,13 @@ if __name__ == "__main__":
     with open('input_example.txt', 'r') as file:
         lexer.get_symbols(file.read())
     state = StateLR(lexer)
-    while state.state_name != 'END':
-        state.next()
+    try:
+        while state.state_name != 'END':
+            state.next()
+        with open('example_output.txt', 'w') as file:
+            file.write('Логи работы автомата: \n')
+            for log in state.logs:
+                file.write(' '.join(log) + '\n')
+    except Exception as e:
+        with open('example_output.txt', 'w') as file:
+            file.write('Выражение не принадлежит языку')

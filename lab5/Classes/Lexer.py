@@ -9,12 +9,14 @@ class Lexer:
         self.info_dict = dict()
         self.symbols = deque()
         self.current_symbol = ""
+        self.non_terminal_symbols = list()
 
     def initiate_states(self, state_dict):
         self.state_dict = state_dict
 
-    def initiate_info(self, info_dict):
+    def initiate_info(self, info_dict, non_terminal_symbols):
         self.info_dict = info_dict
+        self.non_terminal_symbols = list(non_terminal_symbols)
 
     def get_symbols(self, text):
         cleaned_text = re.sub(r'\s+', ' ', text)
@@ -33,6 +35,7 @@ class Lexer:
         self.current_symbol = symbol
 
     def action_s(self):
+        #if self.current_symbol not in self.non_terminal_symbols:
         self.current_symbol = self.symbols.popleft()
 
     def get_next_state(self, state_name):
